@@ -8,7 +8,6 @@ interface PokemonItem {
 }
 
 export default function Pokemon() {
-  // 1. Typage du state en tableau vide par défaut au lieu de null / any
   const [pokemons, setPokemons] = useState<PokemonItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -17,15 +16,12 @@ export default function Pokemon() {
   useEffect(() => {
     async function loadPokemon() {
       try {
-        // 2. Appel de l'URL de liste au lieu du détail #25
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=50&offset=0");
         if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`);
         }
-
         const data = await response.json();
 
-        // 3. Transformation des données DANS le bloc try
         const transData = data.results.map((item: { name: string; url: string }) => {
           const parts = item.url.split("/").filter(Boolean);
           const id = parseInt(parts[parts.length - 1], 10);
@@ -37,7 +33,6 @@ export default function Pokemon() {
           };
         });
 
-        // 4. Mise à jour du state avec les données transformées
         setPokemons(transData);
       } catch (error) {
         setError("Impossible de charger le catalogue.");
@@ -61,7 +56,6 @@ export default function Pokemon() {
     setSearchTerm(event.target.value);
   };
 
-  // 5. Filtrage sur le tableau `pokemons`
   const filteredPokemons = pokemons.filter((p) =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
