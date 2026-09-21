@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <section className="hero">
-      <p className="eyebrow">Projet Movie Explorer</p>
-      <h2>Découvrez notre sélection de titres</h2>
+      <p className="eyebrow">Pokedex</p>
+      <h2>Bienvenue dans le Pokedex!</h2>
       <p>
-        Cette version reprend les séances précédentes : pages et navigation, route
-        dynamique, page 404, puis chargement du catalogue depuis une API distante
-        avec gestion du chargement et des erreurs.
+        Ce site vous permet de consulter les informations sur les différents Pokémon et de découvrir leurs caractéristiques uniques.
       </p>
-      <Link className="primary-button" to="/movies">Voir le catalogue</Link>
+      <Link className="primary-button" to="/pokemons">Voir le catalogue</Link>
     </section>
   );
 }
