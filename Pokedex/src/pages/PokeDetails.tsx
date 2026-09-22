@@ -1,0 +1,67 @@
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import type { Poke } from "../types/Pokemon";
+
+export default function PokeDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [pokemon, setPokemon] = useState<Poke | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadShow() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP : ${response.status}`);
+        }
+
+        const data = await response.json();
+        setPokemon(data);
+      } catch (error) {
+        setError("Ce Pokémon est introuvable.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadShow();
+  }, [id]);
+
+  if (loading) {
+    return <p className="state-message">Chargement de la fiche...</p>;
+  }
+
+  if (error || !pokemon) {
+    return (
+      <section className="panel">
+        <p className="eyebrow">Erreur</p>
+        <h2>Titre introuvable</h2>
+        <p>Aucune ressource ne correspond à l'identifiant {id}.</p>
+        <Link className="primary-button" to="/movies">Retour au catalogue</Link>
+      </section>
+    );
+  }
+
+  return (
+    <section className="panel">
+      <p className="eyebrow">{pokemon.types.map((t) => t.name).join(" · ") || "Non classé"}</p>
+      <h2>{pokemon.name}</h2>
+      <p><strong> :</strong> {pokemon.premiered}</p>
+      <p><strong>Taille :</strong> {pokemon.height}</p>
+      <p><strong>Poids :</strong> {pokemon.weight}</p>
+      <p><strong>Espèce :</strong> {pokemon.species?.name || "Inconnu"}</p>
+      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
+      
+      <button className="secondary-button" onClick={() => navigate(-1)}>
+        ← Retour au Pokedex
+      </button>
+    </section>
+  );
+}
