@@ -6,5 +6,5 @@ export interface Poke {
   weight : number;
   species: { name: string; url: string } | null;
   types: { name: string; url: string }[];
-  image: { medium: string; original: string } | null;
+  image: string | null;
 }
