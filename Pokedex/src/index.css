@@ -9,10 +9,6 @@ body { margin: 0; }
 
 
 
-
-
-
-
 /* En-tête et navigation */
 
 .site-header {
@@ -28,3 +24,15 @@ body { margin: 0; }
 .nav { display: flex; flex-wrap: wrap; gap: 8px; }
 .nav-button { color: #dbe6fb; text-decoration: none; padding: 9px 13px; border-radius: 9px; }
 .nav-button:hover, .nav-button.active { background: #fff; color: #000000; }
+
+
+/* Catalogue */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 28px rgba(20, 37, 70, .07);
+}
