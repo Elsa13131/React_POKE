@@ -1,9 +1,9 @@
 import { createContext, useState, useContext } from "react";
-import type { Show } from "../types/Show";
+import type { Poke } from "../types/Pokemon";
 
 type FavoritesContextType = {
-  favorites: Show[];
-  toggleFavorite: (show: Show) => void;
+  favorites: Poke[];
+  toggleFavorite: (show: Poke) => void;
   isFavorite: (id: number) => boolean;
 };
 
@@ -11,14 +11,14 @@ export const FavoriteContext = createContext<FavoritesContextType| undefined>(un
 
 
 export function FavoriteContextProvider({ children }: { children: React.ReactNode }) {
-  const [favorites, setFavorites] = useState<Show[]>([]);
+  const [favorites, setFavorites] = useState<Poke[]>([]);
 
 function isFavorite(id: number) {
     return favorites.some((f) => f.id === id);
   }
 
 
-function toggleFavorite(show: Show) {
+function toggleFavorite(show: Poke) {
     setFavorites((prev) =>
       prev.some((f) => f.id === show.id)
         ? prev.filter((f) => f.id !== show.id)
