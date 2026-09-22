@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PokemonCard from "../components/PokemonCard";
 
 interface PokemonItem {
   name: string;
@@ -76,17 +77,11 @@ export default function Pokemon() {
         </div>
         <p>{filteredPokemons.length} Pokémons affichés</p>
       </div>
-
-      <ul>
+      <div className="pokemon-grid">
         {filteredPokemons.map((p) => (
-          <li key={p.id}>
-            <img src={p.image} alt={p.name} width={50} />
-            <span>
-              #{p.id} - {p.name}
-            </span>
-          </li>
+          <PokemonCard key={p.id} pokemon={p} />
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
