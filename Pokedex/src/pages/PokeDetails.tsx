@@ -50,18 +50,30 @@ export default function PokeDetails() {
   }
 
   return (
-    <section className="panel">
-      <p className="eyebrow">{pokemon.types.map((t) => t.name).join(" · ") || "Non classé"}</p>
-      <h2>{pokemon.name}</h2>
-      <p><strong> :</strong> {pokemon.premiered}</p>
-      <p><strong>Taille :</strong> {pokemon.height}</p>
-      <p><strong>Poids :</strong> {pokemon.weight}</p>
-      <p><strong>Espèce :</strong> {pokemon.species?.name || "Inconnu"}</p>
-      <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
-      
-      <button className="secondary-button" onClick={() => navigate(-1)}>
-        ← Retour au Pokedex
-      </button>
-    </section>
-  );
+  <section className="panel">
+    <p className="eyebrow">{pokemon.types.map((t) => t.type.name).join(" · ") || "Non classé"}</p>
+    <h2>{pokemon.name}</h2>
+    <p><strong>Taille :</strong> {pokemon.height}</p>
+    <p><strong>Poids :</strong> {pokemon.weight}</p>
+
+    <p><strong>Talents :</strong> {pokemon.abilities.map((a) => a.ability.name).join(", ")}</p>
+
+    <p>
+      <strong>Statistiques :</strong>{" "}
+      {pokemon.stats.map((s) => `${s.stat.name} ${s.base_stat}`).join(" · ")}
+    </p>
+
+    <p>
+      <strong>Attaques ({pokemon.moves.length}) :</strong>{" "}
+      {pokemon.moves.map((m) => m.move.name).join(", ")}
+    </p>
+
+    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
+
+    <button className="secondary-button" onClick={() => navigate(-1)}>
+      ← Retour au Pokedex
+    </button>
+  </section>
+);
 }
+
