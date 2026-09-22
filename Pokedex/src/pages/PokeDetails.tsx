@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { Poke } from "../types/Pokemon";
+import { useFavorites } from "../pages/FavoritesContext";
 
 export default function PokeDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [pokemon, setPokemon] = useState<Poke | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
     async function loadShow() {
@@ -44,10 +45,11 @@ export default function PokeDetails() {
         <p className="eyebrow">Erreur</p>
         <h2>Titre introuvable</h2>
         <p>Aucune ressource ne correspond à l'identifiant {id}.</p>
-        <Link className="primary-button" to="/movies">Retour au catalogue</Link>
+        <Link className="primary-button" to="/">Retour au catalogue</Link>
       </section>
     );
   }
+  const favorite = isFavorite(pokemon.id);
 
   return (
   <section className="panel">
@@ -70,10 +72,15 @@ export default function PokeDetails() {
 
     <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
 
+    <button
+        className="secondary-button"
+        onClick={() => toggleFavorite(pokemon)}
+      >
+        {favorite ? " Retirer des favoris" : " Ajouter aux favoris"}
+      </button>
     <button className="secondary-button" onClick={() => navigate(-1)}>
       ← Retour au Pokedex
     </button>
   </section>
 );
 }
-

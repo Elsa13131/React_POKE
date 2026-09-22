@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { FavoriteContext } from "../pages/FavoritesContext";
 import PokemonCard from "../components/PokemonCard";
 import { useFavorites } from "../pages/FavoritesContext";
 
@@ -24,7 +22,6 @@ export default function Favorites() {
       </ul>
   )}
       <p> {favorites.length} favoris</p>
-      <p>Aucun favori pour le moment.</p>
     </section>
   );
 }
