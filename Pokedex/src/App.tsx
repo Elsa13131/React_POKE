@@ -14,10 +14,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pokemons" element={<Pokemon />} />
-<<<<<<<<< Temporary merge branch 1
-=========
-
->>>>>>>>> Temporary merge branch 2
         </Routes>
       </main>
     </div>
