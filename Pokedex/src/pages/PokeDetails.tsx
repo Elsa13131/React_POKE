@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { Poke } from "../types/Pokemon";
+import { useFavorites } from "../pages/FavoritesContext";
 
 export default function PokeDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [pokemon, setPokemon] = useState<Poke | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
     async function loadShow() {
@@ -49,10 +50,21 @@ export default function PokeDetails() {
     );
   }
 
+  const favorite = isFavorite(pokemon.id);
+
   return (
   <section className="panel">
-    <p className="eyebrow">{pokemon.types.map((t) => t.type.name).join(" · ") || "Non classé"}</p>
-    <h2>{pokemon.name}</h2>
+    <div className="detail-intro">
+      <div className="img-detail">
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
+      </div>
+
+      <div className="detail-heading">
+        <h2>{pokemon.name}</h2>
+        <p className="eyebrow">{pokemon.types.map((t) => t.type.name).join(" · ") || "Non classé"}</p>
+      </div>
+    </div>
+
     <p><strong>Taille :</strong> {pokemon.height}</p>
     <p><strong>Poids :</strong> {pokemon.weight}</p>
 
@@ -68,7 +80,12 @@ export default function PokeDetails() {
       {pokemon.moves.map((m) => m.move.name).join(", ")}
     </p>
 
-    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
+    <button
+        className="secondary-button"
+        onClick={() => toggleFavorite(pokemon)}
+      >
+        {favorite ? " Retirer de l'équipe" : " Ajouter a l'équipe"}
+      </button>
 
     <button className="secondary-button" onClick={() => navigate(-1)}>
       ← Retour au Pokedex

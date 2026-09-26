@@ -7,9 +7,12 @@ interface PokemonCardData {
 }
 
 export default function PokemonCard({ pokemon }: { pokemon: PokemonCardData }) {
+  const imageUrl =
+    pokemon.image ||
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
   return (
-    <article className="movie-card">
-      <img className="poster-image" src={pokemon.image} alt={pokemon.name} />
+    <article className="pokemon-card">
+      <img className="poster-image" src={imageUrl} alt={pokemon.name} />
 
       <div>
         <p className="eyebrow">#{pokemon.id}</p>

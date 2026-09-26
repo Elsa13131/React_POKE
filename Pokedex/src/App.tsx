@@ -6,6 +6,8 @@ import './App.css'
 import PokeDetails from "./pages/PokeDetails";
 import Favorites from "./pages/Favorites";
 import { FavoriteContextProvider } from "./pages/FavoritesContext";
+import Suggest from "./pages/Suggest";
+import NotFound from "./pages/NotFound";
 
 
 export default function App() {
@@ -20,6 +22,8 @@ export default function App() {
           <Route path="/pokemons" element={<Pokemon />} />
           <Route path="/pokemons/:id" element={<PokeDetails />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/suggest" element={<Suggest />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </div>

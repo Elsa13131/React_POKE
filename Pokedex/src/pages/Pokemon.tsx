@@ -94,17 +94,18 @@ export default function Pokemon() {
 
   return (
     <section>
+      <div className="search-bar">
       <input
         type="text"
         placeholder="Rechercher un Pokémon sur cette page..."
         onChange={(e) => setSearchTerm(e.target.value)}
         value={searchTerm}
       />
+      </div>
 
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Pokédex</p>
-          <h2>Pokémons</h2>
+          <h2>Pokédex</h2>
         </div>
         <p>{filteredPokemons.length} Pokémons affichés</p>
       </div>
