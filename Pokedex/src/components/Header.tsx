@@ -13,7 +13,8 @@ export default function Header() {
       <nav className="nav">
         <NavLink to="/" end className={navClass}>Accueil</NavLink>
         <NavLink to="/pokemons" className={navClass}>Pokémons</NavLink>
-        <NavLink to="/favorites" className={navClass}>Favoris</NavLink>
+        <NavLink to="/favorites" className={navClass}>Mon équipe</NavLink>
+        <NavLink to="/suggest" className={navClass}>Suggérer un pokemon</NavLink>
       </nav>
     </header>
   );

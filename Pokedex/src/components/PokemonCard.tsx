@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 interface PokemonCardData {
   id: number;
   name: string;
-  image: string;
+  image?: string;
 }
 
 export default function PokemonCard({ pokemon }: { pokemon: PokemonCardData }) {
@@ -11,7 +11,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonCardData }) {
     pokemon.image ||
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
   return (
-    <article className="movie-card">
+    <article className="pokemon-card">
       <img className="poster-image" src={imageUrl} alt={pokemon.name} />
 
       <div>

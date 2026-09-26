@@ -53,8 +53,17 @@ export default function PokeDetails() {
 
   return (
   <section className="panel">
-    <p className="eyebrow">{pokemon.types.map((t) => t.type.name).join(" · ") || "Non classé"}</p>
-    <h2>{pokemon.name}</h2>
+    <div className="detail-intro">
+      <div className="img-detail">
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
+      </div>
+
+      <div className="detail-heading">
+        <h2>{pokemon.name}</h2>
+        <p className="eyebrow">{pokemon.types.map((t) => t.type.name).join(" · ") || "Non classé"}</p>
+      </div>
+    </div>
+
     <p><strong>Taille :</strong> {pokemon.height}</p>
     <p><strong>Poids :</strong> {pokemon.weight}</p>
 
@@ -70,14 +79,13 @@ export default function PokeDetails() {
       {pokemon.moves.map((m) => m.move.name).join(", ")}
     </p>
 
-    <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} alt={pokemon.name} />
-
     <button
         className="secondary-button"
         onClick={() => toggleFavorite(pokemon)}
       >
-        {favorite ? " Retirer des favoris" : " Ajouter aux favoris"}
+        {favorite ? " Retirer de l'équipe" : " Ajouter a l'équipe"}
       </button>
+
     <button className="secondary-button" onClick={() => navigate(-1)}>
       ← Retour au Pokedex
     </button>
